@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Produk Samstore</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #101820;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      color: #00ffe1;
+    }
+
+    .product-section, .form-container {
+      max-width: 700px;
+      margin: auto;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 10px;
+    }
+
+    ul li {
+      padding: 4px 0;
+    }
+
+    .category {
+      margin-top: 15px;
+    }
+
+    .form-container input, .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .form-container button {
+      padding: 10px 20px;
+      background: #00ffe1;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .notif {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.4s ease;
+    }
+
+    .notif.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .notif-box {
+      background: white;
+      color: black;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .notif-box h3 {
+      margin-bottom: 15px;
+    }
+
+    .emoji {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Daftar Produk Samstore</h1>
+
+  <div class="product-section">
+    <div class="category">
+      <h2>NOKOS</h2>
+      <ul>
+        <li>- Nokos Luar 7K-20K [ Fresh ]</li>
+        <li>- Nokos Indonesia 2K [ Fresh ]</li>
+        <li>- Nokos Luar 15-30 [ Save 7+ hari ]</li>
+        <li>- Nokos Indonesia 6K [ Save 7+ hari ]</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>JASA BUG</h2>
+      <ul>
+        <li>- 1 Nomor 1K</li>
+        <li>- 2 Nomor 2K</li>
+        <li>- 3 Nomor 3K</li>
+        <li>- 4 Nomor 4K</li>
+        <li>- 6 Nomor 5K <span class="emoji">[ PROMO 🎉 ]</span></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>MURBUG</h2>
+      <ul>
+        <li>- 1 Hari 2K</li>
+        <li>- 2 Hari 4K</li>
+        <li>- 1 Minggu 6K <span class="emoji">[ PROMO 🎉 ]</span></li>
+        <li>- Permanen 10K <span class="emoji">[ SELAMANYAA ]</span></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Own Murbug</h2>
+      <ul>
+        <li>- Owner Murbug Justin V17 Gen 2 || 20K</li>
+        <li>- Owner Murbug Evourth Gen 5 || 15K</li>
+        <li>- Owner Murbug Nted Gen 4 || 10K</li>
+        <li>- Owner Murbug Nted Gen 5 || 25K</li>
+        <li>- Owner Murbug Evil-crasher || 5K</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>SCRIPT BOT WHATSAPP</h2>
+      <ul>
+        <li>- Script bot Jpmch 1K</li>
+        <li>- Script bot Cpanel 2K</li>
+        <li>- Script bot CpanelXJpmch [ 1 Program ] 4K</li>
+        <li>- Script bot buat Script GRATIS [ JAN SPAM PAKE OTAK ]</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <form id="form">
+      <label>Nama Pemesan [ Jangan Nama Asli ]</label>
+      <input type="text" name="nama" required>
+
+      <label>Nomor WhatsApp</label>
+      <input type="text" name="wa" required>
+
+      <label>Produk yang Dibeli</label>
+      <textarea name="produk" rows="5" placeholder="Contoh: Nokos Luar 7K [Fresh]"></textarea>
+
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+
+  <div class="notif" id="notif">
+    <div class="notif-box">
+      <h3>Terima Kasih!</h3>
+      <p>Silakan lanjut ke pembayaran untuk menyelesaikan transaksi kamu.</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("form");
+    const notif = document.getElementById("notif");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const token = "7269332189:AAEFFqSjxwT2Jiy-E8JIAO_ZZKrYenvQFm4";
+      const chatId = "7625804862";
+      const data = new FormData(form);
+      const text = `PRODUK SAMSTORE\n\nNama: ${data.get("nama")}\nWhatsApp: ${data.get("wa")}\nProduk: ${data.get("produk")}`;
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text
+        })
+      });
+
+      notif.classList.add("active");
+      setTimeout(() => {
+        window.location.href = "https://mr666-cry.github.io/Samstore/payment.html";
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
